@@ -83,12 +83,57 @@ class LinkedList(object):
         if not found:
             raise Exception(f"Target value ({target_value}) not found in linked list ({self}).")
 
-
     def remove_first(self):
         node = self.head
         if node is None:
             raise Exception("Linked list is empty.")
         self.head = node.next
+    
+    def remove_last(self):
+        node = self.head
+        if node is None:
+            raise Exception("Linked list is empty.")
+        if node.next is None:
+            self.head = None
+        previous_node = None
+        while node.next is not None:
+            previous_node = node
+            node = node.next
+        previous_node.next = None
+
+    def reverse(self):
+        node = self.head
+        if node is None:
+            raise Exception("Linked list is empty.")
+        previous_node = None
+        while node is not None:
+            next_node = node.next
+            node.next = previous_node
+            self.head = node
+
+            previous_node = node
+            node = next_node
+
+    def remove(self, value):
+        # Will remove every nodes with specific value.
+        node = self.head
+        if node is None:
+            raise Exception("Linked list is empty.")
+        
+        found = False
+        previous_node = None
+        while node is not None:
+            if node.data == value:
+                found = True
+                if previous_node is None:
+                    self.head = node.next
+                else:
+                    previous_node.next = node.next
+            previous_node = node
+            node = node.next
+        
+        if not found:
+            print(f"Value to be removed ({value}) not found in linked list ({self}).")
 
 
 if __name__ == "__main__":
@@ -99,6 +144,6 @@ if __name__ == "__main__":
     for element in elements:
         llist.insert_last(element)
     
-    llist.insert_before('c', 'foo')
+    llist.remove('f')
 
     print(llist)
