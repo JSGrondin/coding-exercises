@@ -1,3 +1,21 @@
+"""
+The Node and LinkedList classes together implement a basic singly linked list
+data structure. The Node class represents an individual node in a linked list, 
+containing data and a reference to the next node. The LinkedList class provides
+a collection of connected nodes, allowing for operations like insertion,
+deletion, and traversal.
+
+LinkedList Methods:
+- insert_first(self, value): Inserts a new node at the beginning of the list. Time Complexity: O(1)
+- insert_last(self, value): Inserts a new node at the end of the list. Time Complexity: O(n)
+- insert_after(self, target_value, new_value): Inserts a new node after a node with the target value. Time Complexity: O(n)
+- insert_before(self, target_value, new_value): Inserts a new node before a node with the target value. Time Complexity: O(n)
+- remove_first(self): Removes the first node of the list. Time Complexity: O(1)
+- remove_last(self): Removes the last node of the list. Time Complexity: O(n)
+- reverse(self): Reverses the list in place. Time Complexity: O(n)
+- remove(self, value): Removes all nodes with the specified value. Time Complexity: O(n)
+"""
+
 class Node(object):
     def __init__(self, value):
         self.data = value

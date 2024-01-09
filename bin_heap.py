@@ -1,5 +1,15 @@
-from shutil import ExecError
+"""
+A binary heap is a data structure that takes the form of a complete binary tree. This
+implementation is a min-heap, where the parent node has a value that is smaller or equal
+to its child. 
 
+Methods:
+- insert: Adds a new value to the heap. Time Complexity: O(log n)
+- validate: Validates the heap property throughout the entire heap. Time Complexity: O(n)
+- del_min: Removes and returns the smallest element from the heap. Time Complexity: O(log n)
+- min_child: Returns the index of the smaller child of a given node. Time Complexity: O(1)
+- build_heap: Builds a heap from a list of elements. Time Complexity: O(n log n)
+"""
 
 class BinaryHeap(object):
     def __init__(self):
@@ -12,18 +22,18 @@ class BinaryHeap(object):
     def insert(self, value):
         self.heap.append(value)
         self.size += 1
-        self.percup()
+        self._percup()
     
-    def percup(self):
+    def _percup(self):
         i = self.size
         while i // 2 > 0:
             if self.heap[i] < self.heap[i // 2]:
-                self.swap(i, i // 2)
+                self._swap(i, i // 2)
                 i = i // 2
             else:
                 break
     
-    def swap(self, idx_a, idx_b):
+    def _swap(self, idx_a, idx_b):
         tmp = self.heap[idx_a]
         self.heap[idx_a] = self.heap[idx_b]
         self.heap[idx_b] = tmp
@@ -38,15 +48,15 @@ class BinaryHeap(object):
         min_val = self.heap[1]
         self.heap[1] = self.heap.pop()
         self.size -= 1
-        self.percdown()
+        self._percdown()
         return min_val
     
-    def percdown(self):
+    def _percdown(self):
         i = 1
         while i * 2 <= self.size:
             mc = self.min_child(i)
             if self.heap[i] > self.heap[mc]:
-                self.swap(i, mc)
+                self._swap(i, mc)
                 i = mc
             else:
                 break
@@ -63,7 +73,6 @@ class BinaryHeap(object):
     def build_heap(self, element_list):
         for element in element_list:
             bheap.insert(element)
-        bheap.validate()
         return bheap
 
 
@@ -72,6 +81,7 @@ if __name__ == "__main__":
 
     bheap = BinaryHeap()
     bheap.build_heap(elements)
+    bheap.validate()
 
     bheap.del_min()
 
